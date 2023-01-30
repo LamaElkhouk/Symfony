@@ -1,0 +1,14 @@
+test:
+    path: /test
+    controller: App\Controller\TestController::test
+
+#test2:
+    #path: /test2/{age<\d+>?0}
+    #controller: App\Controller\TestController::test2
+    #methods: [GET, POST] #CONTRAINTE SUR LA ROUTE
+    # host: localhost #{subdomain}.monsite.com    #api.monsite.com   www.monsite.com
+    #schemes: [https, http]
+    #defaults:
+    #    age: 0       SINON  /test2/{age?0}
+    #requirements:
+    #    age: \d+      SINON  /test2/{age<\d+>}
