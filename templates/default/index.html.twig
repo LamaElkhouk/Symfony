@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	-  Accueil
+{% endblock %}
+
+{% block body %}
+
+	<h1>{{titre}}</h1>
+	<h2>liste de produits :{{ tab | length }}</h2>
+	<ul class="articles">
+		{% for element in tab %}
+			<li class="article">
+				<img src="{{element.image}}" alt="{{element.image}}" style="heigth:5rem">
+				<h3>{{element.nom}}</h3>
+				<div class="prix">
+					<p>{{element.prix}}</p>
+					<a class="btn btn-success" href="{{ path('detail',{'nom':element.nom}) }}">En savoir plus</a>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+
+
+{% endblock %}

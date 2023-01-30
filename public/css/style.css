@@ -1,0 +1,26 @@
+
+
+h1{
+    color: red;
+}
+.articles{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:2rem;
+}
+.article{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 15rem;
+}
+.article img{
+    width: 100%;
+}
+.prix{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+li{
+    list-style: none;
+}
