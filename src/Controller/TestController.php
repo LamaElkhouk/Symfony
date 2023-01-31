@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Product;
+use App\Repository\ProductRepository;
 
 class TestController extends AbstractController
 {
@@ -21,19 +23,16 @@ class TestController extends AbstractController
      * @Route("/",name="index")
      * @return void
      */
-    public function index()
+    public function index(ProductRepository $productRepository)
     {
         /*var_dump("ça fonctionne");
         die();*/
 
         $titre = "titre principal";
+        $randomProducts = $this->$productRepository->getRandomProduct()->getResult();
+        dump($randomProducts);
 
-
-        /*$tab =[
-            {'id':1;'nom':'item'}
-        ]*/
-        // $nb = count($this->tab);
-        return $this->render('default/index.html.twig', ['titre' => $titre, 'tab' => $this->tab,]);
+        return $this->render('default/index.html.twig', ['titre' => $titre]);
     }
     /**
      * Undocumented function
