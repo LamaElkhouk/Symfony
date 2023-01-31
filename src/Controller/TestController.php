@@ -29,30 +29,42 @@ class TestController extends AbstractController
      */
     public function index()
     {
-        /*var_dump("ça fonctionne");
-        die();*/
-
-        $titre = "titre principal";
+        $titre = "Accueil";
         $randomProducts = $this->productRepository->getRandomProduct()->getResult();
-        //dd($randomProducts);  //dump() and die()
-
+        //dd($randomProducts);  //var_dump() and die()
         return $this->render('default/index.html.twig', ['titre' => $titre, 'tab' => $randomProducts]);
     }
+    /**
+     * @Route("/products/page",name="allProducts")
+     */
+    public function allProducts()
+    {
+        $titre = "Tout les produits";
+        $Products = $this->productRepository->findAll();
+        $nbProduct = $this->productRepository->nbProduct()->getSingleScalarResult();
+
+        return $this->render('default/produits.html.twig', ['titre' => $titre, 'tab' => $Products, 'nbProduct' => $nbProduct]);
+    }
+
     /**
      * Undocumented function
      *
      * @param [type] $nom
      * @return void
-     * @Route("/article/{nom}",name="detail")
+     * @Route("/produit/{name}",name="detail")
      */
-    public function detail($nom)
+    public function detail($name)
     {
-        $titre = "detail d'un produit : ";
+        $titre = "Détail d'un produit : ";
 
+        $item = $this->productRepository->findBy(['name' => $name]);
+
+        //dd($item);
         // tester si le produit existe dans la liste
-        if (array_key_exists($nom, $this->tab)) {
+        /*if (array_key_exists($nom, $this->tab)) {
             return $this->render('default/detail.html.twig', ['titre' => $titre, 'nom' => $nom]);
-        }
+        }*/
+        return $this->render('default/detail.html.twig', ['titre' => $titre, 'item' => $item]);
     }
     /**
      * Undocumented function

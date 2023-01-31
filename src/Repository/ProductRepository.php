@@ -47,6 +47,14 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery();
     }
 
+    public function nbProduct()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('count(p)')
+            ->getQuery();
+    }
+
+
     //    /**
     //     * @return Product[] Returns an array of Product objects
     //     */

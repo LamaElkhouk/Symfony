@@ -4,7 +4,18 @@
 {% endblock %}
 
 {% block body %}
-	<h1>{{titre}}{{nom}}</h1>
+	<h1>{{titre}}</h1>
+	{% for element in item %}
+		<div class="article">
+			<img src="{{element.image}}" alt="{{element.image}}" style="heigth:5rem">
+			<h3>{{element.name}}</h3>
+			<p>{{element.description}}</p>
+			<div classe="prix">
+				<p>{{element.price}}</p>
+				<a class="btn btn-success" href="#">Acheter</a>
+			</div>
+		</div>
+	{% endfor %}
 
 
 {% endblock %}

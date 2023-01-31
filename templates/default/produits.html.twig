@@ -2,13 +2,14 @@
 
 {% block title %}
 	{{ parent() }}
-	-  Accueil
+	-  Produits
 {% endblock %}
 
 {% block body %}
 
 	<h1>{{titre}}</h1>
-	<h2>produits au hasard</h2>
+	<h2>Liste de produits :
+		{{nbProduct}}</h2>
 	<ul class="articles">
 		{% for element in tab %}
 			<li class="article">
