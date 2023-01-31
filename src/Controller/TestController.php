@@ -11,12 +11,6 @@ use App\Repository\ProductRepository;
 
 class TestController extends AbstractController
 {
-    private array $tab = [
-        'item1' => ["nom" => "item1", "prix" => 10, "image" => "images/robe_grise.jpg"],
-        'item2' => ["nom" => "item2", "prix" => 11, "image" => "images/robe_noire.jpg"],
-        'item3' => ["nom" => "item3", "prix" => 9, "image" => "images/robe_rose.jpg"],
-        'item4' => ["nom" => "item4", "prix" => 12, "image" => "images/robe_verte.jpg"],
-    ];
 
     public function __construct(private ProductRepository $productRepository)
     {
@@ -35,15 +29,22 @@ class TestController extends AbstractController
         return $this->render('default/index.html.twig', ['titre' => $titre, 'tab' => $randomProducts]);
     }
     /**
-     * @Route("/products/page",name="allProducts")
+     * @Route("/products",name="allProducts")
+     * @Route("/products/page/{PAGE}",name="allProducts")
      */
-    public function allProducts()
+    public function allProducts(Request $request)
     {
         $titre = "Tout les produits";
-        $Products = $this->productRepository->findAll();
+        //$Products = $this->productRepository->findAll();
+
         $nbProduct = $this->productRepository->nbProduct()->getSingleScalarResult();
 
-        return $this->render('default/produits.html.twig', ['titre' => $titre, 'tab' => $Products, 'nbProduct' => $nbProduct]);
+        $page = $request->query->get('PAGE', 1);
+        $limit = 4;
+        $pagination = $this->productRepository->pagination($page, $limit);
+        dump($pagination);
+
+        return $this->render('default/produits.html.twig', ['titre' => $titre, 'tab' => $pagination, 'nbProduct' => $nbProduct, 'PAGE' => $page, 'pagination' => $pagination]);
     }
 
     /**
@@ -60,17 +61,13 @@ class TestController extends AbstractController
         $item = $this->productRepository->findBy(['name' => $name]);
 
         //dd($item);
-        // tester si le produit existe dans la liste
-        /*if (array_key_exists($nom, $this->tab)) {
-            return $this->render('default/detail.html.twig', ['titre' => $titre, 'nom' => $nom]);
-        }*/
+
         return $this->render('default/detail.html.twig', ['titre' => $titre, 'item' => $item]);
     }
     /**
-     * Undocumented function
-     *
      * @param Request $request
      * @return void
+     * @Route("/test",name="test")
      */
     public function test(Request $request)
     {
@@ -94,8 +91,6 @@ class TestController extends AbstractController
     }
 
     /**
-     * Undocumented function
-     *
      * @param Request $request
      * @param [type] $age
      * @return void

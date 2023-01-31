@@ -8,20 +8,31 @@
 {% block body %}
 
 	<h1>{{titre}}</h1>
-	<h2>Liste de produits :
+	<h2>Nombre total des produits :
 		{{nbProduct}}</h2>
 	<ul class="articles">
-		{% for element in tab %}
+		{% for element in tab.query %}
 			<li class="article">
-				<img src="{{element.image}}" alt="{{element.image}}" style="heigth:5rem">
+				<img src="{{asset(element.image)}}" alt="{{element.image}}" style="height:15rem">
 				<h3>{{element.name}}</h3>
 				<div class="prix">
-					<p>{{element.price}}</p>
+					<p>{{element.price}}€</p>
 					<a class="btn btn-success" href="{{ path('detail',{'name':element.name}) }}">En savoir plus</a>
 				</div>
 			</li>
 		{% endfor %}
 	</ul>
+
+	<nav>
+		<ul class="pagination">
+
+			{%  for i in 1..pagination.nb_pages %}
+				<li class="page-item">
+					<a class="page-link" href="{{path('allProducts',{'PAGE':i})}}">{{i}}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</nav>
 
 
 {% endblock %}

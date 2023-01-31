@@ -38,7 +38,11 @@ class ProductRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    /**
+     * Retourne 3 produits au hasard
+     *
+     * @return void
+     */
     public function getRandomProduct()
     {
         return $this->createQueryBuilder('p')
@@ -47,11 +51,42 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery();
     }
 
+    /**
+     * Retourne le nombre de produit
+     *
+     * @return void
+     */
     public function nbProduct()
     {
         return $this->createQueryBuilder('p')
             ->select('count(p)')
             ->getQuery();
+    }
+
+    //pagination(numero de la page ou je me trouve, nombre de resultats à afficher par page)
+    public function pagination($page, $limit)
+    {
+        $count = $this->createQueryBuilder('p')
+            ->select('count(p)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $nbPage = ceil($count / $limit);  //ceil(4.3)= 5 arrondi à l'entier superieur
+
+        $query = $this->createQueryBuilder('p')
+            ->setMaxResults($limit)
+            ->setFirstResult(($page * $limit) - $limit)
+            ->getQuery()
+            ->getResult();
+
+        $resultat = [];
+
+        $resultat['nb_pages'] = $nbPage;
+        $resultat['limit'] = $limit;
+        $resultat['page'] = $page;
+        $resultat['query'] = $query;
+
+        return $resultat;
     }
 
 
