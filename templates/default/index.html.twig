@@ -13,10 +13,10 @@
 		{% for element in tab %}
 			<li class="article">
 				<img src="{{element.image}}" alt="{{element.image}}" style="heigth:5rem">
-				<h3>{{element.nom}}</h3>
+				<h3>{{element.name}}</h3>
 				<div class="prix">
-					<p>{{element.prix}}</p>
-					<a class="btn btn-success" href="{{ path('detail',{'nom':element.nom}) }}">En savoir plus</a>
+					<p>{{element.price}}</p>
+					<a class="btn btn-success" href="{{ path('detail',{'nom':element.name}) }}">En savoir plus</a>
 				</div>
 			</li>
 		{% endfor %}

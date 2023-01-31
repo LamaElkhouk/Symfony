@@ -18,21 +18,25 @@ class TestController extends AbstractController
         'item4' => ["nom" => "item4", "prix" => 12, "image" => "images/robe_verte.jpg"],
     ];
 
+    public function __construct(private ProductRepository $productRepository)
+    {
+    }
+
 
     /**
      * @Route("/",name="index")
      * @return void
      */
-    public function index(ProductRepository $productRepository)
+    public function index()
     {
         /*var_dump("ça fonctionne");
         die();*/
 
         $titre = "titre principal";
-        $randomProducts = $this->$productRepository->getRandomProduct()->getResult();
-        dump($randomProducts);
+        $randomProducts = $this->productRepository->getRandomProduct()->getResult();
+        //dd($randomProducts);  //dump() and die()
 
-        return $this->render('default/index.html.twig', ['titre' => $titre]);
+        return $this->render('default/index.html.twig', ['titre' => $titre, 'tab' => $randomProducts]);
     }
     /**
      * Undocumented function
