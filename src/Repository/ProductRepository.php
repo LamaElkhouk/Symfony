@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -54,9 +55,8 @@ class ProductRepository extends ServiceEntityRepository
     /**
      * Retourne le nombre de produit
      *
-     * @return void
      */
-    public function nbProduct()
+    public function nbProduct(): Query
     {
         return $this->createQueryBuilder('p')
             ->select('count(p)')
@@ -66,12 +66,12 @@ class ProductRepository extends ServiceEntityRepository
     //pagination(numero de la page ou je me trouve, nombre de resultats à afficher par page)
     public function pagination($page, $limit)
     {
-        $count = $this->createQueryBuilder('p')
-            ->select('count(p)')
-            ->getQuery()
-            ->getSingleScalarResult();
+        // $count = $this->createQueryBuilder('p')
+        //     ->select('count(p)')
+        //     ->getQuery()
+        //     ->getSingleScalarResult();
 
-        $nbPage = ceil($count / $limit);  //ceil(4.3)= 5 arrondi à l'entier superieur
+        $nbPage = ceil($this->nbProduct()->getSingleScalarResult() / $limit);  //ceil(4.3)= 5 arrondi à l'entier superieur
 
         $query = $this->createQueryBuilder('p')
             ->setMaxResults($limit)

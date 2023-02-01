@@ -28,23 +28,23 @@ class TestController extends AbstractController
         //dd($randomProducts);  //var_dump() and die()
         return $this->render('default/index.html.twig', ['titre' => $titre, 'tab' => $randomProducts]);
     }
+
     /**
-     * @Route("/products",name="allProducts")
-     * @Route("/products/page/{PAGE}",name="allProducts")
+     * @Route("/products", name="allProductsV2")
+     * @Route("/products/page/{page}", name="allProducts")
      */
-    public function allProducts(Request $request)
+    public function allProducts(int $page = 1)
     {
         $titre = "Tout les produits";
         //$Products = $this->productRepository->findAll();
 
         $nbProduct = $this->productRepository->nbProduct()->getSingleScalarResult();
 
-        $page = $request->query->get('PAGE', 1);
         $limit = 4;
         $pagination = $this->productRepository->pagination($page, $limit);
         dump($pagination);
 
-        return $this->render('default/produits.html.twig', ['titre' => $titre, 'tab' => $pagination, 'nbProduct' => $nbProduct, 'PAGE' => $page, 'pagination' => $pagination]);
+        return $this->render('default/produits.html.twig', ['titre' => $titre, 'tab' => $pagination, 'nbProduct' => $nbProduct, 'page' => $page, 'pagination' => $pagination]);
     }
 
     /**

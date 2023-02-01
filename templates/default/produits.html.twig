@@ -28,7 +28,7 @@
 
 			{%  for i in 1..pagination.nb_pages %}
 				<li class="page-item">
-					<a class="page-link" href="{{path('allProducts',{'PAGE':i})}}">{{i}}</a>
+					<a class="page-link" href="{{path('allProducts',{'page':i})}}">{{i}}</a>
 				</li>
 			{% endfor %}
 		</ul>
