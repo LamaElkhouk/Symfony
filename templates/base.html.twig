@@ -24,15 +24,15 @@
 						<a class="nav-link" href="{{path('allProducts',{'PAGE':1})}}">Produits</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Catégorie</a>
+						<a class="nav-link" href="{{path('indexCategory')}}">Catégorie</a>
 					</li>
 				</ul>
 			</nav>
 		</header>
 		<div class="container"> {% block body %}{% endblock %}
 			</div>
-			<footer>
-				<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+			<footer class="fixed-bottom">
+				<div class="text-center p-4" style="background-color: #c7c0c0;">
 					© 2023 Copyright:
 					<a class="text-reset fw-bold" href="#">Lamia El Khoukhi</a>
 				</div>

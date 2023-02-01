@@ -3,13 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ORM\Index(
-    columns: ['name', 'slug'],
-    flags: ['unique']
+columns: ['name', 'slug'],
+flags: ['unique']
 )]
 class Product
 {
@@ -32,6 +34,17 @@ class Product
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
+    private Collection $products;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Category $category = null;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -97,4 +110,18 @@ class Product
 
         return $this;
     }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+
 }

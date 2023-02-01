@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	-  Category
+{% endblock %}
+
+{% block body %}
+
+	<h1>{{titre}}</h1>
+	<div style="display:flex;flex-direction:row;gap:2rem">
+		{% for e in categories %}
+			<div style="display:flex;flex-direction:row;gap:0.5rem">
+				<a class="btn btn-info" href="{{ path('indexCategory2',{'id':e.id}) }}">{{e.name}}</a>
+				:
+				<p>{{e.nbProduct}}
+					produits</p>
+			</div>
+		{% endfor %}
+	</div>
+
+
+	<ul>
+		{% for e in produit_par_category %}
+
+			<li>nom:{{e[0].name}}
+				- prix:
+				{{e[0].price}}€</li>
+
+		{% endfor %}
+
+	</ul>
+
+
+{% endblock %}

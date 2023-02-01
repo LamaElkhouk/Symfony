@@ -42,7 +42,7 @@ class TestController extends AbstractController
 
         $limit = 4;
         $pagination = $this->productRepository->pagination($page, $limit);
-        dump($pagination);
+        //dump($pagination);
 
         return $this->render('default/produits.html.twig', ['titre' => $titre, 'tab' => $pagination, 'nbProduct' => $nbProduct, 'page' => $page, 'pagination' => $pagination]);
     }
@@ -103,5 +103,13 @@ class TestController extends AbstractController
 
         //$age = $request->attributes->get('age');  SINON appeler $age dans les parametres de la fonction!
         return new Response("vous avez $age ans");
+    }
+
+    /**
+     * @Route("/hello/{nom?world}",name="AfficheHello")
+     */
+    public function AfficheHello(Request $request, $nom)
+    {
+        return new Response("Hello $nom");
     }
 }
