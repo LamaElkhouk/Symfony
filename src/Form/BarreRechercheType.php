@@ -19,7 +19,7 @@ class BarreRechercheType extends AbstractType
             ->add('name', TextType::class, [
                 'constraints' => [
                     new NotBlank(['message' => 'votre sujet']),
-                    new Length(['min' => 5, 'max' => 30]),
+                    new Length(['min' => 3, 'max' => 30]),
                 ],
             ])
 
