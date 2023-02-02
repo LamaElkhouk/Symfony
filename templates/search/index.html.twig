@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	-  Search
+{% endblock %}
+
+{% block body %}
+
+	<h1>{{titre}}</h1>
+
+
+	{{ form_start(form, { attr: { novalidate: 'novalidate' } }) }}
+	<div class="my-custom-class-for-errors">
+		{{ form_errors(form) }}
+	</div>
+
+	<div class="d-flex" role="search">
+
+		<div class="form-control me-2">
+			{{ form_row(form.name,{ attr: { placeholder: 'Rentrez le nom du produit' } }) }}
+		</div>
+
+		<button class="btn btn-outline-success" type="submit">Search</button>
+	</div>
+	{{ form_end(form) }}
+
+	<ul class="articles">
+		{% for element in resultats %}
+			<li class="article">
+				<img src="{{asset(element.image)}}" alt="{{element.image}}" style="height:15rem">
+				<h3>{{element.name}}
+					-
+					{{element.category.name}}</h3>
+				<div class="prix">
+					<p>{{element.price}}€
+					</p>
+					<a class="btn btn-success" href="{{ path('detail',{'name':element.name}) }}">En savoir plus</a>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+
+
+{% endblock %}

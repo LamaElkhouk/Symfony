@@ -26,8 +26,6 @@ class CategoryController extends AbstractController
 
         $produit_par_category = $this->categoryRepository->getProductsByCategory($id);
         $titre = "Categories";
-        //dump($categorie);
-        //dump($produit_par_category);
         return $this->render('default/category.html.twig', ['titre' => $titre, 'categories' => $categorie, 'produit_par_category' => $produit_par_category]);
     }
 

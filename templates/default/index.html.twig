@@ -13,6 +13,12 @@
 	{% endfor %}
 
 	<h1>{{titre}}</h1>
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<p>Tu es connecté en tant que
+			{{ app.user.email }}</p>
+	{% else %}
+		<p>Bonjour visiteur!</p>
+	{% endif %}
 	<h2>produits au hasard</h2>
 	<ul class="articles">
 		{% for element in tab %}

@@ -52,6 +52,17 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery();
     }
 
+    //retourne le/les produits dont les noms est egale à  $saisie
+    public function search($saisie): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.name LIKE :saisie')
+            ->setParameter('saisie', '%' . $saisie . '%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /**
      * Retourne le nombre de produit
      *
@@ -66,11 +77,6 @@ class ProductRepository extends ServiceEntityRepository
     //pagination(numero de la page ou je me trouve, nombre de resultats à afficher par page)
     public function pagination($page, $limit)
     {
-        // $count = $this->createQueryBuilder('p')
-        //     ->select('count(p)')
-        //     ->getQuery()
-        //     ->getSingleScalarResult();
-
         $nbPage = ceil($this->nbProduct()->getSingleScalarResult() / $limit); //ceil(4.3)= 5 arrondi à l'entier superieur
 
         $query = $this->createQueryBuilder('p')
