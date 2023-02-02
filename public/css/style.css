@@ -1,26 +1,42 @@
-
-
-h1{
+h1 {
     color: red;
 }
-.articles{
+
+.articles {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap:2rem;
+    gap: 2rem;
 }
-.article{
+
+.article {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     width: 15rem;
 }
-.article img{
+
+.article img {
     width: 100%;
 }
-.prix{
+
+.prix {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-li{
+
+li {
     list-style: none;
+}
+
+#contact_save {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+
 }
