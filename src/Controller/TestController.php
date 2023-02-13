@@ -21,7 +21,7 @@ class TestController extends AbstractController
      * @Route("/",name="index")
      * @return void
      */
-    public function index()
+    public function index(): Response
     {
         $titre = "Accueil";
         $randomProducts = $this->productRepository->getRandomProduct()->getResult();
@@ -54,7 +54,7 @@ class TestController extends AbstractController
      * @return void
      * @Route("/produit/{name}",name="detail")
      */
-    public function detail($name)
+    public function detail($name): Response
     {
         $titre = "Détail d'un produit : ";
 

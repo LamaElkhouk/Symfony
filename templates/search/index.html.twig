@@ -31,7 +31,10 @@
 				<img src="{{asset(element.image)}}" alt="{{element.image}}" style="height:15rem">
 				<h3>{{element.name}}
 					-
-					{{element.category.name}}</h3>
+					{% if element.category != NULL %}
+						{{element.category.name}}
+					{% endif %}
+				</h3>
 				<div class="prix">
 					<p>{{element.price}}€
 					</p>
