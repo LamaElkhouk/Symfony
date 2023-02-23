@@ -2,12 +2,25 @@ h1 {
     color: red;
 }
 
+
+
 .articles {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
 }
+
+.footer {
+    position: absolute;
+    background-color: #4CAF50;
+    width: 100%;
+    text-align: center;
+
+}
+
 
 .article {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
